@@ -1,10 +1,13 @@
 defmodule X2.Interpreter do
-  def eval(ast),
-    do: to_literal(ast, %{})
+  def eval(ast, binding \\ %{}) do
+    {_binding, value} = do_eval(ast, binding)
+
+    value
+  end
 
   defp do_eval({op, lhs, rhs}, binding) when op in ~w(+ - * / ==)a do
-    values = [to_literal(lhs, binding),
-              to_literal(rhs, binding)]
+    values = [eval(lhs, binding),
+              eval(rhs, binding)]
 
     {binding, apply(Kernel, op, values)}
   end
@@ -16,7 +19,7 @@ defmodule X2.Interpreter do
   end
 
   defp do_eval({:"=", name, expression}, binding) do
-    literal = to_literal(expression, binding)
+    literal = eval(expression, binding)
     binding = Map.put(binding, name, literal)
 
     {binding, literal}
@@ -28,14 +31,9 @@ defmodule X2.Interpreter do
     {binding, value}
   end
 
+  defp do_eval(literal, binding) when is_number(literal),
+    do: {binding, literal}
+
   defp do_eval(unknown, _binding),
     do: raise RuntimeError, "Unknown syntax #{inspect unknown}"
-
-  defp to_literal(literal, _binding) when is_number(literal),
-    do: literal
-  defp to_literal(expression, binding) do
-    {_binding, value} = do_eval(expression, binding)
-
-    value
-  end
 end
