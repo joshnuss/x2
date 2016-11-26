@@ -2,11 +2,12 @@ defmodule X2.Interpreter do
   def eval(ast),
     do: to_literal(ast, %{})
 
-  defp do_eval({op, a, b}, binding) when op in ~w(+ - * / ==)a do
-    aval = to_literal(a, binding)
-    bval = to_literal(b, binding)
+  defp do_eval({op, lhs, rhs}, binding) when op in ~w(+ - * / ==)a do
+    values = [to_literal(lhs, binding),
+              to_literal(rhs, binding)]
+    result = apply(Kernel, op, values)
 
-    {binding, apply(Kernel, op, [aval, bval])}
+    {binding, result}
   end
 
   defp do_eval(list, binding) when is_list(list) do
