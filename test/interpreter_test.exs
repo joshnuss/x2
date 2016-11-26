@@ -40,4 +40,29 @@ defmodule X1.Interpreter.Test do
 
     assert eval(expressions) == 7
   end
+
+  describe "variable" do
+    test "assign" do
+      assert eval({:"=", :a, 1}) == 1
+    end
+
+    test "read" do
+      expressions = [
+        {:"=", :a, 1},
+        {:call, :a, []}
+      ]
+
+      assert eval(expressions) == 1
+    end
+
+    test "re-assign" do
+      expressions = [
+        {:"=", :a, 1},
+        {:"=", :a, 3},
+        {:call, :a, []}
+      ]
+
+      assert eval(expressions) == 3
+    end
+  end
 end
