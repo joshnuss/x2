@@ -26,4 +26,13 @@ defmodule X1.Interpreter.Test do
       assert eval({:/, 15, 2}) == 7.5
     end
   end
+
+  test "running list of expressions" do
+    expressions = [
+      {:+, 1, 2},
+      {:+, 3, 4}
+    ]
+
+    assert eval(expressions) == 7
+  end
 end
