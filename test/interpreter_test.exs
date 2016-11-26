@@ -42,13 +42,13 @@ defmodule X1.Interpreter.Test do
   end
 
   describe "variable" do
-    test "assign" do
-      assert eval({:"=", :a, 1}) == 1
+    test "declare" do
+      assert eval({:declare, :a, 1}) == 1
     end
 
     test "read" do
       expressions = [
-        {:"=", :a, 1},
+        {:declare, :a, 1},
         {:call, :a, []}
       ]
 
@@ -57,8 +57,8 @@ defmodule X1.Interpreter.Test do
 
     test "re-assign" do
       expressions = [
-        {:"=", :a, 1},
-        {:"=", :a, 3},
+        {:declare, :a, 1},
+        {:declare, :a, 3},
         {:call, :a, []}
       ]
 
@@ -67,7 +67,7 @@ defmodule X1.Interpreter.Test do
 
     test "addition" do
       expressions = [
-        {:"=", :a, 77},
+        {:declare, :a, 77},
         {:+,
           {:call, :a, []},
           {:call, :a, []}
@@ -79,7 +79,7 @@ defmodule X1.Interpreter.Test do
 
     test "subtraction" do
       expressions = [
-        {:"=", :a, 77},
+        {:declare, :a, 77},
         {:-,
           {:call, :a, []},
           {:call, :a, []}
@@ -91,7 +91,7 @@ defmodule X1.Interpreter.Test do
 
     test "multiplication" do
       expressions = [
-        {:"=", :a, 3},
+        {:declare, :a, 3},
         {:*,
           {:call, :a, []},
           {:call, :a, []}
@@ -103,7 +103,7 @@ defmodule X1.Interpreter.Test do
 
     test "division" do
       expressions = [
-        {:"=", :a, 10},
+        {:declare, :a, 10},
         {:/,
           {:call, :a, []},
           {:call, :a, []}
@@ -115,7 +115,7 @@ defmodule X1.Interpreter.Test do
 
     test "equality" do
       expressions = [
-        {:"=", :a, 77},
+        {:declare, :a, 77},
         {:==,
           {:call, :a, []},
           {:call, :a, []}

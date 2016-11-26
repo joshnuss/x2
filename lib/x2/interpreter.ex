@@ -6,8 +6,10 @@ defmodule X2.Interpreter do
   end
 
   defp do_eval({op, lhs, rhs}, binding) when op in ~w(+ - * / ==)a do
-    values = [eval(lhs, binding),
-              eval(rhs, binding)]
+    values = [
+      eval(lhs, binding),
+      eval(rhs, binding)
+    ]
 
     {binding, apply(Kernel, op, values)}
   end
@@ -18,7 +20,7 @@ defmodule X2.Interpreter do
     end
   end
 
-  defp do_eval({:"=", name, expression}, binding) do
+  defp do_eval({:declare, name, expression}, binding) do
     literal = eval(expression, binding)
     binding = Map.put(binding, name, literal)
 
