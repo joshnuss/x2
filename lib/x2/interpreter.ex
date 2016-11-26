@@ -1,7 +1,4 @@
 defmodule X2.Interpreter do
-  def eval({:+, a, b}),
-    do: a + b
-
-  def eval({:-, a, b}),
-    do: a - b
+  def eval({op, a, b}) when op == :+ or op == :-,
+    do: apply(Kernel, op, [a, b])
 end
