@@ -5,9 +5,8 @@ defmodule X2.Interpreter do
   defp do_eval({op, lhs, rhs}, binding) when op in ~w(+ - * / ==)a do
     values = [to_literal(lhs, binding),
               to_literal(rhs, binding)]
-    result = apply(Kernel, op, values)
 
-    {binding, result}
+    {binding, apply(Kernel, op, values)}
   end
 
   defp do_eval(list, binding) when is_list(list) do
