@@ -1,5 +1,5 @@
 defmodule X2.Interpreter do
-  def eval({op, a, b}) when op in ~w(+ - * /)a,
+  def eval({op, a, b}) when op in ~w(+ - * / ==)a,
     do: apply(Kernel, op, [a, b])
 
   def eval(list) when is_list(list) do

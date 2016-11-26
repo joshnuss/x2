@@ -25,6 +25,11 @@ defmodule X1.Interpreter.Test do
     test "division" do
       assert eval({:/, 15, 2}) == 7.5
     end
+
+    test "equality" do
+      refute eval({:==, 15, 2})
+      assert eval({:==, 15, 15})
+    end
   end
 
   test "running list of expressions" do
