@@ -3,11 +3,13 @@ defmodule X1.Interpreter.Test do
 
   import X2.Interpreter
 
-  test "addition" do
-    assert eval({:+, 1, 2}) == 3
-  end
+  describe "literal" do
+    test "addition" do
+      assert eval({:+, 1, 2}) == 3
+    end
 
-  test "subtraction" do
-    assert eval({:-, 1, 5}) == -4
+    test "subtraction" do
+      assert eval({:-, 1, 5}) == -4
+    end
   end
 end
