@@ -17,5 +17,9 @@ defmodule X1.Interpreter.Test do
     test "subtraction" do
       assert eval({:-, 1, 5}) == -4
     end
+
+    test "multiplication" do
+      assert eval({:*, 3, 5}) == 15
+    end
   end
 end
