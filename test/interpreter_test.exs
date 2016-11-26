@@ -21,5 +21,9 @@ defmodule X1.Interpreter.Test do
     test "multiplication" do
       assert eval({:*, 3, 5}) == 15
     end
+
+    test "division" do
+      assert eval({:/, 15, 2}) == 7.5
+    end
   end
 end
