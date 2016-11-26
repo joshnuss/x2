@@ -64,5 +64,65 @@ defmodule X1.Interpreter.Test do
 
       assert eval(expressions) == 3
     end
+
+    test "addition" do
+      expressions = [
+        {:"=", :a, 77},
+        {:+,
+          {:call, :a, []},
+          {:call, :a, []}
+        }
+      ]
+
+      assert eval(expressions) == 154
+    end
+
+    test "subtraction" do
+      expressions = [
+        {:"=", :a, 77},
+        {:-,
+          {:call, :a, []},
+          {:call, :a, []}
+        }
+      ]
+
+      assert eval(expressions) == 0
+    end
+
+    test "multiplication" do
+      expressions = [
+        {:"=", :a, 3},
+        {:*,
+          {:call, :a, []},
+          {:call, :a, []}
+        }
+      ]
+
+      assert eval(expressions) == 9
+    end
+
+    test "division" do
+      expressions = [
+        {:"=", :a, 10},
+        {:/,
+          {:call, :a, []},
+          {:call, :a, []}
+        }
+      ]
+
+      assert eval(expressions) == 1
+    end
+
+    test "equality" do
+      expressions = [
+        {:"=", :a, 77},
+        {:==,
+          {:call, :a, []},
+          {:call, :a, []}
+        }
+      ]
+
+      assert eval(expressions)
+    end
   end
 end
